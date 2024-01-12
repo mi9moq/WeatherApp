@@ -4,7 +4,7 @@ import dagger.Component
 
 @AppScope
 @Component(modules = [
-    DataModule::class
+    NetworkModule::class
 ])
 interface AppComponent {
 }
