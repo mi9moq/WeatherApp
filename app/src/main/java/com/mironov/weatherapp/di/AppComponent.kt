@@ -1,10 +1,23 @@
 package com.mironov.weatherapp.di
 
+import android.app.Application
+import dagger.BindsInstance
 import dagger.Component
 
 @AppScope
-@Component(modules = [
-    NetworkModule::class
-])
+@Component(
+    modules = [
+        NetworkModule::class,
+        DataBaseModule::class,
+    ]
+)
 interface AppComponent {
+
+
+    @Component.Factory
+    interface Factory {
+        fun create(
+            @BindsInstance application: Application
+        ): AppComponent
+    }
 }
