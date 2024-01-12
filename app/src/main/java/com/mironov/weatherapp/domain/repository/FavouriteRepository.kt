@@ -3,7 +3,7 @@ package com.mironov.weatherapp.domain.repository
 import com.mironov.weatherapp.domain.entity.City
 import kotlinx.coroutines.flow.Flow
 
-interface FavoriteRepository {
+interface FavouriteRepository {
 
     fun getAll(): Flow<List<City>>
 
