@@ -1,10 +1,10 @@
 package com.mironov.weatherapp.domain.entity
 
-import java.time.LocalDateTime
+import java.util.Calendar
 
 data class Weather(
-    val temperature: Float,
-    val date: LocalDateTime,
+    val temp: Float,
+    val date: Calendar,
     val condition: String,
     val conditionUrl: String,
 )
