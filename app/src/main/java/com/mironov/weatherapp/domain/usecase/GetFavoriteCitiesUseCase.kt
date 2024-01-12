@@ -9,5 +9,5 @@ class GetFavoriteCitiesUseCase @Inject constructor(
     private val repository: FavoriteRepository
 ) {
 
-    operator fun invoke(): Flow<List<City>> = repository.get()
+    operator fun invoke(): Flow<List<City>> = repository.getAll()
 }

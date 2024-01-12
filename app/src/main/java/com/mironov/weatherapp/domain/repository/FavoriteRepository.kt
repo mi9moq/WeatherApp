@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
 
-    fun get(): Flow<List<City>>
+    fun getAll(): Flow<List<City>>
 
     suspend fun add(city: City)
 

@@ -4,5 +4,5 @@ import com.mironov.weatherapp.domain.entity.City
 
 interface SearchRepository {
 
-    suspend fun search(query: String): List<City>
+    suspend fun searchCity(query: String): List<City>
 }

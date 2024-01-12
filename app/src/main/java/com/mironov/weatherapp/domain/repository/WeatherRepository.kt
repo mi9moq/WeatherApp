@@ -5,7 +5,7 @@ import com.mironov.weatherapp.domain.entity.Weather
 
 interface WeatherRepository {
 
-    suspend fun get(cityId: Int): Weather
+    suspend fun getCurrent(cityId: Int): Weather
 
     suspend fun getForecast(cityId: Int): Forecast
 }
