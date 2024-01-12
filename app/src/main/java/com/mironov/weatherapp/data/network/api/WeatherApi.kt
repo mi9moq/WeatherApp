@@ -1,4 +1,4 @@
-package com.mironov.weatherapp.data.network
+package com.mironov.weatherapp.data.network.api
 
 import com.mironov.weatherapp.data.network.dto.CityDto
 import com.mironov.weatherapp.data.network.dto.CurrentWeatherResponse
