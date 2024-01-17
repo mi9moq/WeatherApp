@@ -11,6 +11,7 @@ import dagger.Component
         DataBaseModule::class,
         DispatcherModule::class,
         FavouriteModule::class,
+        SearchModule::class,
     ]
 )
 interface AppComponent {
