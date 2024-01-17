@@ -10,6 +10,7 @@ import dagger.Component
         NetworkModule::class,
         DataBaseModule::class,
         DispatcherModule::class,
+        FavouriteModule::class,
     ]
 )
 interface AppComponent {
