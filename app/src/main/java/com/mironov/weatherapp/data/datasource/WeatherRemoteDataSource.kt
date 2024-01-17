@@ -1,9 +1,9 @@
-package com.mironov.weatherapp.domain.repository
+package com.mironov.weatherapp.data.datasource
 
 import com.mironov.weatherapp.domain.entity.Forecast
 import com.mironov.weatherapp.domain.entity.Weather
 
-interface WeatherRepository {
+interface WeatherRemoteDataSource {
 
     suspend fun getCurrent(cityId: Int): Weather
 

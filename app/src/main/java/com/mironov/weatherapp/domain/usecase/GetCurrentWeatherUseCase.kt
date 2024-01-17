@@ -7,5 +7,5 @@ class GetCurrentWeatherUseCase @Inject constructor(
     private val repository: WeatherRepository
 ) {
 
-    suspend operator fun invoke(cityId: Int) = repository.get(cityId)
+    suspend operator fun invoke(cityId: Int) = repository.getCurrent(cityId)
 }
