@@ -12,6 +12,7 @@ import dagger.Component
         DispatcherModule::class,
         FavouriteModule::class,
         SearchModule::class,
+        WeatherModule::class,
     ]
 )
 interface AppComponent {
