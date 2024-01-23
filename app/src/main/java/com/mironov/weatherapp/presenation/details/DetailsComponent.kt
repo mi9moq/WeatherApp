@@ -2,7 +2,7 @@ package com.mironov.weatherapp.presenation.details
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface DetailsComponentDetailsComponent {
+interface DetailsComponent {
 
     val model: StateFlow<DetailsStore.State>
 
