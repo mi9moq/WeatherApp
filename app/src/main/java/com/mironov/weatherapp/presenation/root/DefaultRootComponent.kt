@@ -38,50 +38,69 @@ class DefaultRootComponent @AssistedInject constructor(
         componentContext: ComponentContext
     ): RootComponent.Child = when (config) {
         is Config.Details -> {
-            val component = detailsComponentFactory.create(
-                city = config.city,
-                onBackClicked = {
-                    navigation.pop()
-                },
-                componentContext = componentContext
-            )
-            RootComponent.Child.Details(component)
+            applyDetails(componentContext, config.city)
         }
 
         Config.Favourite -> {
-            val component = favouriteComponentFactory.create(
-                onCityItemClicked = {
-                    navigation.push(Config.Details(it))
-                },
-                onAddFavouriteClicked = {
-                    navigation.push(Config.Search(OpenReason.AddToFavourite))
-                },
-                onSearchClicked = {
-                    navigation.push(Config.Search(OpenReason.RegularSearch))
-                },
-                componentContext = componentContext,
-            )
-            RootComponent.Child.Favourite(component)
+            applyFavourite(componentContext)
         }
 
         is Config.Search -> {
-            val component = searchComponentFactory.create(
-                openReason = config.openReason,
-                onBackClicked = {
-                    navigation.pop()
-                },
-                onCitySavedToFavourite = {
-                    navigation.pop()
-                },
-                onForecastForCityRequested = {
-                    navigation.push(Config.Details(it))
-                },
-                componentContext = componentContext
-            )
-            RootComponent.Child.Search(component)
+            applySearch(componentContext, config.openReason)
         }
     }
 
+    private fun applyDetails(
+        componentContext: ComponentContext,
+        city: City
+    ): RootComponent.Child.Details {
+        val component = detailsComponentFactory.create(
+            city = city,
+            onBackClicked = {
+                navigation.pop()
+            },
+            componentContext = componentContext
+        )
+        return RootComponent.Child.Details(component)
+    }
+
+    private fun applyFavourite(
+        componentContext: ComponentContext,
+    ): RootComponent.Child.Favourite {
+        val component = favouriteComponentFactory.create(
+            onCityItemClicked = {
+                navigation.push(Config.Details(it))
+            },
+            onAddFavouriteClicked = {
+                navigation.push(Config.Search(OpenReason.AddToFavourite))
+            },
+            onSearchClicked = {
+                navigation.push(Config.Search(OpenReason.RegularSearch))
+            },
+            componentContext = componentContext,
+        )
+        return RootComponent.Child.Favourite(component)
+    }
+
+    private fun applySearch(
+        componentContext: ComponentContext,
+        openReason: OpenReason
+    ): RootComponent.Child.Search {
+        val component = searchComponentFactory.create(
+            openReason = openReason,
+            onBackClicked = {
+                navigation.pop()
+            },
+            onCitySavedToFavourite = {
+                navigation.pop()
+            },
+            onForecastForCityRequested = {
+                navigation.push(Config.Details(it))
+            },
+            componentContext = componentContext
+        )
+        return RootComponent.Child.Search(component)
+    }
 
     sealed interface Config : Parcelable {
 
