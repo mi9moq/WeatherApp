@@ -4,6 +4,7 @@ import com.mironov.weatherapp.data.datasource.SearchRemoteDataSource
 import com.mironov.weatherapp.data.datasource.SearchRemoteDataSourceImpl
 import com.mironov.weatherapp.data.repository.SearchRepositoryImpl
 import com.mironov.weatherapp.domain.repository.SearchRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -11,10 +12,10 @@ import dagger.Provides
 interface SearchModule {
 
     @AppScope
-    @Provides
-    fun provideRemoteDataSource(impl: SearchRemoteDataSourceImpl): SearchRemoteDataSource
+    @Binds
+    fun bindRemoteDataSource(impl: SearchRemoteDataSourceImpl): SearchRemoteDataSource
 
     @AppScope
-    @Provides
-    fun provideRepository(impl: SearchRepositoryImpl): SearchRepository
+    @Binds
+    fun bindRepository(impl: SearchRepositoryImpl): SearchRepository
 }
