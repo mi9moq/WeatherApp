@@ -11,6 +11,7 @@ import com.mironov.weatherapp.domain.usecase.SearchCityUseCase
 import com.mironov.weatherapp.presenation.search.SearchStore.Intent
 import com.mironov.weatherapp.presenation.search.SearchStore.Label
 import com.mironov.weatherapp.presenation.search.SearchStore.State
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -95,6 +96,8 @@ class SearchStoreFactory @Inject constructor(
     private inner class ExecutorImpl(
         private val openReason: OpenReason
     ) : CoroutineExecutor<Intent, Action, State, Msg, Label>() {
+
+        private var searchJob: Job? = null
         override fun executeIntent(intent: Intent, getState: () -> State) {
             when (intent) {
                 is Intent.ChangeSearchQuery -> {
@@ -106,7 +109,8 @@ class SearchStoreFactory @Inject constructor(
                 }
 
                 Intent.ClickSearch -> {
-                    scope.launch {
+                    searchJob?.cancel()
+                    searchJob = scope.launch {
                         dispatch(Msg.LoadingSearchResult)
                         try {
                             val cities = searchCityUseCase(getState().searchQuery)
