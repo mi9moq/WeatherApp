@@ -155,7 +155,12 @@ class SearchStoreFactory @Inject constructor(
                 }
 
                 is Msg.SearchResultLoaded -> {
-                    copy(searchState = State.SearchState.Content(msg.cities))
+                    val searchState = if (msg.cities.isEmpty()) {
+                        State.SearchState.EmptyResult
+                    } else {
+                        State.SearchState.Content(msg.cities)
+                    }
+                    copy(searchState = searchState)
                 }
             }
     }
