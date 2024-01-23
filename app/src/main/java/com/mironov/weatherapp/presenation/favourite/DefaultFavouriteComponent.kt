@@ -6,15 +6,20 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
 import com.mironov.weatherapp.domain.entity.City
 import com.mironov.weatherapp.presenation.extesions.componentScope
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class DefaultFavouriteComponent @Inject constructor(
+class DefaultFavouriteComponent @AssistedInject constructor(
     private val favouriteStoreFactory: FavouriteStoreFactory,
-    private val componentContext: ComponentContext,
+    @Assisted("onCityItemClicked") private val onCityItemClicked: (City) -> Unit,
+    @Assisted("onAddFavouriteClicked") private val onAddFavouriteClicked: () -> Unit,
+    @Assisted("onSearchClicked") private val onSearchClicked: () -> Unit,
+    @Assisted("componentContext") componentContext: ComponentContext,
 ) : FavouriteComponent, ComponentContext by componentContext {
 
     private val store = instanceKeeper.getStore { favouriteStoreFactory.create() }
@@ -26,15 +31,15 @@ class DefaultFavouriteComponent @Inject constructor(
             store.labels.collect { label ->
                 when (label) {
                     is FavouriteStore.Label.CityItemClicked -> {
-
+                        onCityItemClicked(label.city)
                     }
 
                     FavouriteStore.Label.ClickSearch -> {
-
+                        onSearchClicked()
                     }
 
                     FavouriteStore.Label.ClickToFavourite -> {
-
+                        onAddFavouriteClicked()
                     }
                 }
             }
@@ -48,10 +53,21 @@ class DefaultFavouriteComponent @Inject constructor(
     }
 
     override fun onClickAddFavourite() {
-        store.accept(FavouriteStore.Intent.ClickToFavourite)
+        store.accept(FavouriteStore.Intent.ClickAddToFavourite)
     }
 
     override fun onItemCityClick(city: City) {
         store.accept(FavouriteStore.Intent.CityItemClicked(city))
+    }
+
+    @AssistedFactory
+    interface Factory {
+
+        fun create(
+            @Assisted("onCityItemClicked") onCityItemClicked: (City) -> Unit,
+            @Assisted("onAddFavouriteClicked") onAddFavouriteClicked: () -> Unit,
+            @Assisted("onSearchClicked") onSearchClicked: () -> Unit,
+            @Assisted("componentContext") componentContext: ComponentContext,
+        ): DefaultFavouriteComponent
     }
 }
