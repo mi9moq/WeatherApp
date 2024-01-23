@@ -10,12 +10,12 @@ interface RootComponent {
 
     val stack: Value<ChildStack<*, Child>>
 
-    sealed interface Child{
+    sealed interface Child {
 
-        data class Favourite(val component: FavouriteComponent): Child
+        data class Favourite(val component: FavouriteComponent) : Child
 
-        data class Details(val component: DetailsComponent): Child
+        data class Details(val component: DetailsComponent) : Child
 
-        data class Search(val component: SearchComponent): Child
+        data class Search(val component: SearchComponent) : Child
     }
 }
