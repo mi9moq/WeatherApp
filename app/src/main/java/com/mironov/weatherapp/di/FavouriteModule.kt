@@ -4,6 +4,7 @@ import com.mironov.weatherapp.data.datasource.FavouriteLocalDataSource
 import com.mironov.weatherapp.data.datasource.FavouriteLocalDataSourceImpl
 import com.mironov.weatherapp.data.repository.FavouriteRepositoryImpl
 import com.mironov.weatherapp.domain.repository.FavouriteRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -11,10 +12,10 @@ import dagger.Provides
 interface FavouriteModule {
 
     @AppScope
-    @Provides
-    fun provideLocalDataSource(impl: FavouriteLocalDataSourceImpl): FavouriteLocalDataSource
+    @Binds
+    fun bindLocalDataSource(impl: FavouriteLocalDataSourceImpl): FavouriteLocalDataSource
 
     @AppScope
-    @Provides
-    fun provideRepository(impl: FavouriteRepositoryImpl): FavouriteRepository
+    @Binds
+    fun bindRepository(impl: FavouriteRepositoryImpl): FavouriteRepository
 }

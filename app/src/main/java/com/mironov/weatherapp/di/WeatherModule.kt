@@ -4,6 +4,7 @@ import com.mironov.weatherapp.data.datasource.WeatherRemoteDataSource
 import com.mironov.weatherapp.data.datasource.WeatherRemoteDataSourceImpl
 import com.mironov.weatherapp.data.repository.WeatherRepositoryImpl
 import com.mironov.weatherapp.domain.repository.WeatherRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -11,10 +12,10 @@ import dagger.Provides
 interface WeatherModule {
 
     @AppScope
-    @Provides
-    fun provideRemoteDataSource(impl: WeatherRemoteDataSourceImpl): WeatherRemoteDataSource
+    @Binds
+    fun bindRemoteDataSource(impl: WeatherRemoteDataSourceImpl): WeatherRemoteDataSource
 
     @AppScope
-    @Provides
-    fun provideRepository(impl: WeatherRepositoryImpl): WeatherRepository
+    @Binds
+    fun bindRepository(impl: WeatherRepositoryImpl): WeatherRepository
 }
