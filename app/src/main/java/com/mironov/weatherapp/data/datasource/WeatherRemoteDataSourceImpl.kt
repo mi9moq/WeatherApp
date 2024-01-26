@@ -12,7 +12,7 @@ class WeatherRemoteDataSourceImpl @Inject constructor(
 ) : WeatherRemoteDataSource {
 
     private companion object {
-        const val PREFIX = ":id"
+        const val PREFIX = "id:"
     }
 
     override suspend fun getCurrent(cityId: Int): Weather =
