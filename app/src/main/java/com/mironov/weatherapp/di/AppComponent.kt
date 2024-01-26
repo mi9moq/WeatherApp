@@ -1,6 +1,7 @@
 package com.mironov.weatherapp.di
 
 import android.app.Application
+import com.mironov.weatherapp.ui.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 
@@ -18,6 +19,7 @@ import dagger.Component
 )
 interface AppComponent {
 
+    fun inject(activity: MainActivity)
 
     @Component.Factory
     interface Factory {
