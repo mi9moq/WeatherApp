@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("search.json")
+    @GET("current.json")
     suspend fun loadCurrentWeather(
         @Query("q") query: String,
     ): CurrentWeatherResponse
