@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.parcelize)
+    alias(libs.plugins.junit)
 }
 
 android {
@@ -79,4 +80,6 @@ dependencies {
 
     implementation(libs.room.core)
     ksp(libs.room.compiler)
+
+    testImplementation(libs.bundles.unit.tests)
 }
